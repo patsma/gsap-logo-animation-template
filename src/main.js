@@ -9,12 +9,23 @@ import { CustomEase } from "gsap/CustomEase";
 import { CustomBounce } from "gsap/CustomBounce";
 import { CustomWiggle } from "gsap/CustomWiggle";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import GSDevTools from "gsap/GSDevTools";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText, MorphSVGPlugin, ScrollToPlugin, CustomBounce, CustomEase, CustomWiggle, DrawSVGPlugin);
+gsap.registerPlugin(
+  ScrollTrigger, 
+  ScrollSmoother, 
+  SplitText, 
+  MorphSVGPlugin, 
+  ScrollToPlugin, 
+  CustomBounce, 
+  CustomEase, 
+  CustomWiggle, 
+  DrawSVGPlugin,
+  GSDevTools
+);
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("works");
-  // const mediaQuery = window.matchMedia("(min-width: 768px)");
+  console.log("Logo animation initialized");
 
   function loadSVGs(svgs) {
     const fetchPromises = svgs.map((svg) => fetch(svg.url).then((response) => response.text()));
@@ -30,62 +41,79 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function initializeGSAPAnimations() {
+    console.log("Initializing GSAP animations");
+    
+    // Convert SVG elements to paths first
     MorphSVGPlugin.convertToPath("circle, rect, ellipse, line, polygon, polyline");
 
-    const logoGroup = document.querySelector("#logoGroup");
-    const kompot = document.querySelectorAll("#kompot *");
-    const logoIconGroup = document.querySelector("#logoIconGroup");
-    const logoFrame = document.querySelector("#logoFrame");
-    const logoW = document.querySelector("#logoW");
-    const sliwka = document.querySelectorAll("#sliwka *");
-    const clipGroup = document.querySelector("#clipGroup");
+    // Get all our mask elements with simple query selectors
+    const vbMask = document.querySelector("#letterVBmask");
+    const bMask = document.querySelector("#letterBmask");
+    const iMask = document.querySelector("#letterImask");
+    const dot = document.querySelector("#letterIdot");
+    console.log("Masks:", vbMask, bMask, iMask, dot);
+    
+    // Set initial state
+    // gsap.set([vbMask, bMask, iMask], { drawSVG: 0 });
 
-    // New selectors from updated SVG
-    const morphGroup = document.querySelector("#morphGroup");
-    const plum = document.querySelector("#plum path");
-
-    gsap.set(morphGroup, { yPercent: -150 });
-    gsap.set([plum], { autoAlpha: 0 });
-
-    // Clean timeline configuration
-    window.mainTimeline = gsap.timeline({
+    // Create the main animation timeline
+    const mainTimeline = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 3,
+      defaults: {
+        ease: "power2.inOut",
+      },
       onComplete: () => console.log("Animation complete")
     });
 
-    window.mainTimeline
-      .from(sliwka, { autoAlpha: 0, stagger: 0.1, duration: 0.25 })
-      .from(logoFrame, { autoAlpha: 0, yPercent: 15, duration: 0.5, ease: "back.out" })
-      .to(morphGroup, { yPercent: 0, duration: 0.5, ease: "back.out" }, '<')
-      .from(logoW, {
-        morphSVG: { shape: plum, shapeIndex: 6 },
-        fill: "#8e4585",
-        duration: 0.5,
-        ease: "sine.inOut",
-      }, '-=0.5')
-      .from(kompot, { 
-        autoAlpha: 0, 
-        stagger: 0.1, 
-        duration: 0.25 
-      }, '-=0.15')
-      .to(logoW, {
-        morphSVG: {
-          shape: plum,
-          shapeIndex: 6
-        },
-        fill: "#8e4585",
-        ease: "sine.inOut",
-        repeat: 5,
-        yoyo: true,
-        repeatDelay: 1
-      });
+    // Create custom bounce effect
+    CustomBounce.create("dotBounce", {
+      strength: 0.6,
+      squash: 2,
+      squashID: "dotBounce-squash"
+    });
 
-    // For normal viewing, you might want the timeline to repeat
-    // But for export, we keep it finite
-    if (!window.isExporting) {
-      window.mainTimeline.eventCallback("onComplete", () => {
-        // window.mainTimeline.restart();
-      });
-    }
+    // Set initial state for dot
+    gsap.set(dot, {
+
+      y: -100,
+      transformOrigin: "center center"
+    });
+
+    // Add drawing animations in sequence
+    mainTimeline
+      // Draw VB first
+      .from(vbMask, {
+        drawSVG: 0,
+        duration: 2,
+      })
+      // Draw B next
+      .from(bMask, {
+        drawSVG: 1,
+        duration: 1,
+      }, "-=1.25")
+      // Draw I last
+      .from(iMask, {
+        drawSVG: 1,
+        duration: 1,
+      }, "-=0.75")
+      // Bounce in the dot
+      .to(dot, {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "dotBounce",
+      }, "-=0.75")
+      // Add squash and stretch effect
+      .to(dot, {
+        scaleX: 1.2,
+        scaleY: 0.8,
+        duration: 1.5,
+        ease: "dotBounce-squash",
+      }, "<");
+
+    // GSDevTools.create({animation: mainTimeline,minimal: true})
+
   }
 
   // Load SVGs
