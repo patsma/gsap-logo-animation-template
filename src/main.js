@@ -11,6 +11,9 @@ import { CustomWiggle } from "gsap/CustomWiggle";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import GSDevTools from "gsap/GSDevTools";
 
+// Make GSAP available globally for video export
+window.gsap = gsap;
+
 gsap.registerPlugin(
   ScrollTrigger, 
   ScrollSmoother, 
@@ -58,13 +61,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create the main animation timeline
     const mainTimeline = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 3,
+      // repeat: -1,
+      // repeatDelay: 3,
       defaults: {
         ease: "power2.inOut",
       },
       onComplete: () => console.log("Animation complete")
     });
+
+    // Make timeline globally accessible for video export
+    window.tl = mainTimeline;
 
     // Create custom bounce effect
     CustomBounce.create("dotBounce", {
@@ -75,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Set initial state for dot
     gsap.set(dot, {
-
       y: -100,
       transformOrigin: "center center"
     });
@@ -113,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }, "<");
 
     // GSDevTools.create({animation: mainTimeline,minimal: true})
-
   }
 
   // Load SVGs
