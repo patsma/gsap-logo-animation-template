@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "cross-env TAILWIND_MODE=watch vite --host --port 5000",
     "build": "cross-env TAILWIND_MODE=build vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "export:video": "gsap-video-export http://localhost:5000 --output ./exports/animation.mp4 --fps 60",
+    "export:video:hd": "gsap-video-export http://localhost:5000 --output ./exports/animation-1080.mp4 --width 1920 --height 1080 --fps 60",
+    "export:video:4k": "gsap-video-export http://localhost:5000 --output ./exports/animation-4k.mp4 --width 3840 --height 2160 --fps 60",
+    "export:gif": "ffmpeg -i ./exports/animation.mp4 -vf \"fps=30,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" -loop 0 ./exports/animation.gif"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

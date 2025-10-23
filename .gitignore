@@ -123,3 +123,13 @@ dist
 .iddea
 /.vscode/
 /.vscode/
+
+# Animation export artifacts
+exports/*
+!exports/.gitkeep
+frames*/
+palette*.png
+concat*.txt
+lastframe*.png
+anim-*.mp4
+pause*.mp4
