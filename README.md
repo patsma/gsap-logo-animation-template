@@ -2,6 +2,23 @@
 
 A production-ready boilerplate for creating logo animations with GSAP (GreenSock Animation Platform) and seamless video export capabilities.
 
+## Using This as a Template
+
+This repository is designed to be reused for multiple logo animation projects. See **[TEMPLATE.md](./TEMPLATE.md)** for complete instructions on:
+
+- Creating new projects from this template
+- Maintaining connection to template for updates
+- Pulling template improvements into existing projects
+- Managing project-specific vs template-managed files
+
+**Quick Start:**
+1. Click **"Use this template"** button on GitHub
+2. Name your new project (e.g., `your-logo-animation`)
+3. Clone and add template as upstream remote
+4. Customize logo and animation
+
+For detailed workflow, see [TEMPLATE.md](./TEMPLATE.md).
+
 ## Features
 
 - **GSAP (100% Free)** - Includes all plugins: DrawSVG, MorphSVG, CustomBounce, SplitText, and more
@@ -9,6 +26,7 @@ A production-ready boilerplate for creating logo animations with GSAP (GreenSock
 - **TailwindCSS v3** - Utility-first CSS framework
 - **Easy Export** - One-command export to video and GIF
 - **Clean Structure** - Simple, modular, and well-documented
+- **Template Workflow** - Reusable for multiple projects with update propagation
 
 ## Prerequisites
 
@@ -87,6 +105,7 @@ gsap-video-export http://localhost:PORT --output ./exports/animation.mp4 --fps 6
 │   └── index.scss        # Styling
 ├── exports/              # Generated export files (gitignored)
 ├── index.html            # HTML entry point
+├── TEMPLATE.md           # Template usage and workflow guide
 ├── EXPORT.md             # Detailed export guide
 ├── CLAUDE.md             # AI assistant context
 └── example-export.*      # Example outputs

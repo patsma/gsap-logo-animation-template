@@ -10,6 +10,39 @@ This is a **GSAP logo animation template/boilerplate** (branch: `gsap-template`)
 
 **Note:** As of 2025, all GSAP plugins are completely free for all uses (including commercial), installed via the standard npm package.
 
+### Template Repository Workflow
+
+This repository is designed as a **template** for creating multiple logo animation projects:
+
+- **Template Features**: Generic build configuration, export scripts, GSAP setup, and animation structure
+- **Project Customization**: Each project replaces logo.svg and customizes animation timing in src/main.js
+- **Update Propagation**: Projects can add this repo as upstream remote and merge template improvements
+- **GitHub Template**: Repository can be marked as "Template" in GitHub settings for easy project creation
+
+**Key Files:**
+- `TEMPLATE.md` - Complete instructions for using this as a template
+- `README.md` - Template documentation and quick start
+- `CLAUDE.md` - This file, provides AI context for template and projects
+
+**When working with this repository:**
+- If it's the **template repo**: Make changes that benefit all future projects (generic improvements)
+- If it's a **project repo** (created from template): Make project-specific customizations
+- Keep **project-specific** (logo.svg, animation timing) separate from **template-managed** (build config, scripts)
+
+**Template vs Project Files:**
+
+*Template-Managed (accept updates):*
+- Build configuration: vite.config.js, tailwind.config.js, postcss.config.js
+- Export scripts in package.json
+- Documentation: EXPORT.md, TEMPLATE.md
+- Core structure in src/main.js (GSAP setup, plugin registration)
+
+*Project-Specific (keep customizations):*
+- public/logo.svg (each project's unique logo)
+- Animation details in src/main.js (timeline, timing, effects)
+- Project name in package.json
+- README.md and CLAUDE.md (after customization)
+
 ## Development Commands
 
 ```bash
@@ -168,7 +201,9 @@ This is a boilerplate template. To use for a new logo animation:
 
 - `src/main.js` - Main animation logic and GSAP timeline
 - `public/logo.svg` - The logo SVG with mask definitions
+- `TEMPLATE.md` - Complete template workflow and usage instructions
 - `EXPORT.md` - Comprehensive export documentation
-- `README.md` - Template usage guide
+- `README.md` - Template usage guide and quick start
+- `CLAUDE.md` - AI assistant context for template and projects
 - `exports/` - Output directory for generated videos/GIFs (gitignored)
 - `example-export.mp4` / `example-export.gif` - Example outputs
