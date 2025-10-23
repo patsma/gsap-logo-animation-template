@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **GSAP logo animation template/boilerplate** (branch: `gsap-template`) built with Vite, vanilla JavaScript, and GSAP (GreenSock Animation Platform). It includes a working example (Vibeuu logo) demonstrating SVG animation using GSAP's premium plugins including DrawSVG, MorphSVG, and CustomBounce.
+This is a **GSAP logo animation template/boilerplate** (branch: `gsap-template`) built with Vite, vanilla JavaScript, and GSAP (GreenSock Animation Platform). It includes a working example (Vibeuu logo) demonstrating SVG animation using GSAP plugins including DrawSVG, MorphSVG, and CustomBounce.
 
 **Purpose:** Serve as a reusable template for creating logo animations with easy video/GIF export capabilities.
+
+**Note:** As of 2025, all GSAP plugins are completely free for all uses (including commercial), installed via the standard npm package.
 
 ## Development Commands
 
@@ -47,14 +49,22 @@ npm run export:gif
 
 ## Architecture & Key Concepts
 
-### GSAP Premium Plugins
-The project uses GSAP premium plugins installed from a local tarball (`gsap-bonus.tgz`). The following premium plugins are available:
+### GSAP Plugins (All Free!)
+The project uses GSAP plugins installed via the standard npm package. As of 2025, all GSAP plugins are completely free for all uses. The following plugins are available:
 - **DrawSVGPlugin** - Animates SVG strokes (used for drawing the logo letters)
 - **MorphSVGPlugin** - Morphs between SVG shapes
 - **CustomBounce/CustomEase/CustomWiggle** - Custom easing functions
 - **SplitText** - Text animation utilities
 - **ScrollTrigger/ScrollSmoother** - Scroll-based animations
-- **GSDevTools** - Animation debugging tool
+- **GSDevTools** - Animation debugging tool (smart-enabled, see below)
+
+### GSDevTools (Smart Mode)
+The project includes intelligent GSDevTools integration:
+- **Automatically enabled** during development (`npm run dev`) for easy timeline control and testing
+- **Automatically disabled** during video export to ensure clean output without UI controls
+- **Detection method**: Checks for HeadlessChrome user agent (used by gsap-video-export)
+- **Available via**: `window.isExportMode` flag for debugging
+- **Controls**: Play/pause, scrub timeline, speed control, loop toggle in minimal UI mode
 
 ### Animation Structure
 The main animation (`src/main.js`) follows this sequence:

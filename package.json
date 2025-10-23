@@ -20,7 +20,7 @@
     "vite": "^2.4.4"
   },
   "dependencies": {
-    "gsap": "file:gsap-bonus.tgz",
+    "gsap": "^3.13.0",
     "headroom.js": "^0.12.0",
     "netlify-cli": "^18.0.2",
     "onchange": "^7.1.0",

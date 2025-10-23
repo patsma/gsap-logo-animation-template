@@ -4,7 +4,7 @@ A production-ready boilerplate for creating logo animations with GSAP (GreenSock
 
 ## Features
 
-- **GSAP Premium Plugins** - Includes DrawSVG, MorphSVG, CustomBounce, and more
+- **GSAP (100% Free)** - Includes all plugins: DrawSVG, MorphSVG, CustomBounce, SplitText, and more
 - **Vite** - Fast development with hot module replacement
 - **TailwindCSS v3** - Utility-first CSS framework
 - **Easy Export** - One-command export to video and GIF
@@ -155,9 +155,9 @@ gsap.to(element, {
 });
 ```
 
-## GSAP Premium Plugins
+## GSAP Plugins (All Free!)
 
-This template includes GSAP premium plugins from `gsap-bonus.tgz`:
+As of 2025, GSAP and all its plugins are **completely free** for all uses, including commercial projects. This template includes:
 
 - **DrawSVGPlugin** - Animate SVG strokes (draw on/off effect)
 - **MorphSVGPlugin** - Morph between SVG shapes
@@ -166,7 +166,7 @@ This template includes GSAP premium plugins from `gsap-bonus.tgz`:
 - **ScrollTrigger/ScrollSmoother** - Scroll-based animations
 - **GSDevTools** - Timeline debugging tool
 
-For commercial use, ensure you have a valid [GSAP license](https://greensock.com/licensing/).
+All plugins are installed via the standard npm package `gsap` - no special setup required!
 
 ## Animation Export
 

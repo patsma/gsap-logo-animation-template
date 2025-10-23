@@ -133,3 +133,5 @@ concat*.txt
 lastframe*.png
 anim-*.mp4
 pause*.mp4
+
+.DS_Store

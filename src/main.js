@@ -14,6 +14,11 @@ import GSDevTools from "gsap/GSDevTools";
 // Make GSAP available globally for video export
 window.gsap = gsap;
 
+// Detect if we're in export mode (gsap-video-export uses headless Chrome)
+// This allows us to conditionally disable GSDevTools during video export
+const isExportMode = /HeadlessChrome/.test(navigator.userAgent);
+window.isExportMode = isExportMode; // Expose for debugging
+
 gsap.registerPlugin(
   ScrollTrigger, 
   ScrollSmoother, 
@@ -117,7 +122,18 @@ document.addEventListener("DOMContentLoaded", function () {
         ease: "dotBounce-squash",
       }, "<");
 
-    // GSDevTools.create({animation: mainTimeline,minimal: true})
+    // Initialize GSDevTools only in development mode (not during video export)
+    // This gives you timeline controls for easy testing without interfering with exports
+    if (!isExportMode) {
+      GSDevTools.create({
+        animation: mainTimeline,
+        minimal: true,
+        container: document.body
+      });
+      console.log("GSDevTools enabled - use the controls to test your animation");
+    } else {
+      console.log("Export mode detected - GSDevTools disabled for clean export");
+    }
   }
 
   // Load SVGs
