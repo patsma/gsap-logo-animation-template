@@ -14,8 +14,21 @@ A production-ready boilerplate for creating logo animations with GSAP (GreenSock
 
 - **Node.js** (v14 or higher)
 - **npm** or **yarn**
-- **gsap-video-export** (for exporting animations)
-- **FFmpeg** (for video/GIF generation)
+- **gsap-video-export** - Install globally for exporting animations:
+  ```bash
+  npm install -g gsap-video-export
+  ```
+- **FFmpeg** - Required for video/GIF generation:
+  ```bash
+  # macOS
+  brew install ffmpeg
+
+  # Ubuntu/Debian
+  sudo apt install ffmpeg
+
+  # Windows (Chocolatey)
+  choco install ffmpeg
+  ```
 
 ## Quick Start
 
@@ -46,6 +59,8 @@ Edit `src/main.js` to create your animation:
 
 ### 4. Export Your Animation
 
+**Important:** Keep the dev server running in one terminal, then run export commands in another terminal.
+
 See [EXPORT.md](./EXPORT.md) for detailed export instructions.
 
 Quick export:
@@ -54,6 +69,11 @@ npm run export:video      # Standard resolution
 npm run export:video:hd   # 1080p HD
 npm run export:video:4k   # 4K resolution
 npm run export:gif        # Convert to GIF
+```
+
+**Note:** Export scripts use `http://localhost:5000`. If Vite uses a different port, manually run:
+```bash
+gsap-video-export http://localhost:PORT --output ./exports/animation.mp4 --fps 60
 ```
 
 ## Project Structure
